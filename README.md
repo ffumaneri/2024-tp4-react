@@ -6,7 +6,7 @@ Hacer un listado de posts
 
 ### Qué hacer?
 
-ir a [Posts.js](/src/components/Posts.js) y ver los comentarios.
+ir a [Posts.js](/src/components/Posts.js) y ver los comentarios que tienen "TODO:" (a hacer).
 
 Hay que listar todos los post y mostrarlos en una tabla.
 
