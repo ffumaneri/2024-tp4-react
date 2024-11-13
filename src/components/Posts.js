@@ -35,7 +35,6 @@ function Posts() {
         <Container>
             <h1>Posts</h1>
             {/* TODO: mostrar POSTS */}
-            <h2>Aca van los posts</h2>
         </Container>
     )
 }
