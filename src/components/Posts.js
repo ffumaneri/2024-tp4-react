@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { Container, Spinner } from "react-bootstrap";
 
 function Posts() {
+    
+    //TODO: Agregar los states necesarios
+
     const [loading, setLoading] = useState(true)
  
     useEffect(() => {
@@ -15,7 +18,7 @@ function Posts() {
 
     const showPosts = () => {
         return(
-            {/* Mostrar tabla de posts*/ }
+            {/* TODO: Mostrar tabla de posts*/ }
         ) 
     }
     if (loading) {
@@ -31,7 +34,7 @@ function Posts() {
     return (
         <Container>
             <h1>Posts</h1>
-            {/* mostrar POSTS */}
+            {/* TODO: mostrar POSTS */}
             <h2>Aca van los posts</h2>
         </Container>
     )
