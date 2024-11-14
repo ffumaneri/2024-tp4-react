@@ -24,6 +24,7 @@ function UserForm() {
         }
         setLoading(false)
     }, [])
+    
     const enviarDatos = (e) => {
         setLoading(true)
         axios.post("https://jsonplaceholder.typicode.com/users").then(

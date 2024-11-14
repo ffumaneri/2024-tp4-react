@@ -1,4 +1,4 @@
-import {Container, Nav } from 'react-bootstrap';
+import {Container, Nav, Navbar } from 'react-bootstrap';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Users from './components/Users';
 import UserForm from './components/UserForm';
@@ -18,23 +18,29 @@ function Home() {
 function App() {
   return (
     <Router>
-      <Container className='p-6 bg-dark text-white'>
-        <Nav>
-          <Nav.Item>
-            <Nav.Link href="/users">USERS</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href="/posts">POSTS</Nav.Link>
-          </Nav.Item>        
-        </Nav>
+      <Navbar bg="dark" variant="dark" expand="lg">
+        <Container>
+          <Navbar.Brand href="/">Trabajo Práctico 4</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Item>
+              <Nav.Link href="/users">USERS</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/posts">POSTS</Nav.Link>
+            </Nav.Item>        
+          </Nav>
         </Container>
+      </Navbar>
+
+      <Container className="bg-white p-3">
         <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/users' element={<Users/>}/>
-        <Route path='/adduser' element={<UserForm/>}/>
-        <Route path='/edituser' element={<UserForm/>}/>
-        <Route path='/posts' element={<Posts/>}/>
-        </Routes>      
+          <Route path='/' element={<Home/>}/>
+          <Route path='/users' element={<Users/>}/>
+          <Route path='/adduser' element={<UserForm/>}/>
+          <Route path='/edituser' element={<UserForm/>}/>
+          <Route path='/posts' element={<Posts/>}/>
+        </Routes> 
+      </Container>     
     </Router>
   );
 }

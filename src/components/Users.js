@@ -13,6 +13,7 @@ function Users() {
                 setLoading(false)
             })
     }, [])
+
     const usersContent = () => {
         const content = users.map(user =>
             <tr>
@@ -25,21 +26,24 @@ function Users() {
         )
         return <tbody>{content}</tbody>
     }
+    
     const showUsers = () => {
         return(
-            <Table>
-                <thead>
+            <Table bordered hover>
+                <thead className="table-dark">
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Username</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 {usersContent()}
             </Table>
         ) 
     }
+
     if (loading) {
         return (
             <Container>
