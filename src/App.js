@@ -3,10 +3,11 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Users from './components/Users';
 import UserForm from './components/UserForm';
 import Posts from './components/Posts';
+import PostForm from './components/PostForm';
 
 function Home() {
   return (
-   <div>
+  <div>
     <h2>Trabajo Práctico 4</h2>
     <p>
       Hacer el listado de POSTS
@@ -34,6 +35,8 @@ function App() {
         <Route path='/adduser' element={<UserForm/>}/>
         <Route path='/edituser' element={<UserForm/>}/>
         <Route path='/posts' element={<Posts/>}/>
+        <Route path='/editpost' element={<PostForm/>}/>
+        <Route path='/addpost' element={<PostForm/>}/> 
         </Routes>      
     </Router>
   );

@@ -3,10 +3,10 @@ import { useEffect, useState } from "react"
 import { Button, Container, Form, Spinner } from "react-bootstrap"
 import { useNavigate, useSearchParams } from "react-router-dom"
 
-function UserForm() {
+function PostForm(){
     const [searchParams, setSearchParams] = useSearchParams()
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
+    const [title, setTitle] = useState("")
+    const [body, setBody] = useState("")
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
     const [error, setError] = useState(null)
@@ -15,10 +15,10 @@ function UserForm() {
         const id = searchParams.get("id")
         if (id) {
             //Edit
-            axios.get("https://jsonplaceholder.typicode.com/users/" + id).then(
+            axios.get("https://jsonplaceholder.typicode.com/posts/" + id).then(
                 (response) => {
-                    setName(response.data.name)
-                    setEmail(response.data.email)
+                    setTitle(response.data.title)
+                    setBody(response.data.body)
                 }
             )
         }
@@ -26,9 +26,9 @@ function UserForm() {
     }, [])
     const enviarDatos = (e) => {
         setLoading(true)
-        axios.post("https://jsonplaceholder.typicode.com/users").then(
+        axios.post("https://jsonplaceholder.typicode.com/posts").then(
             (response) => {
-                navigate("/users")
+                navigate("/posts")
             }
         ).catch(err => {
             console.log(err)
@@ -40,14 +40,13 @@ function UserForm() {
         e.preventDefault();
         enviarDatos()
     }
-    const onChangeName = (e) => {
+    const onChangeTitle = (e) => {
         e.preventDefault();        
-        setName(e.target.value)
+        setTitle(e.target.value)
     }
-
-    const onChangeEmail = (e) => {
+    const onChangeBody = (e) => {
         e.preventDefault();
-        setEmail(e.target.value)
+        setBody(e.target.value)
     }
     if (loading) {
         return (
@@ -58,22 +57,23 @@ function UserForm() {
             </Container>
         );        
     }
-    return (
+    return(
         <Form onSubmit={handleSubmit} noValidate>
         {error && (<p>Error al enviar datos: {error.message}</p>)}
         <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter name" value={name} onChange={onChangeName}/>
+            <Form.Label>Title</Form.Label>
+            <Form.Control type="text" placeholder="Enter title" value={title} onChange={onChangeTitle}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value={email} onChange={onChangeEmail} />
+            <Form.Label>Body</Form.Label>
+            <Form.Control type="text" placeholder="Enter body" value={body} onChange={onChangeBody} />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+            Submit
         </Button>
-      </Form>
+        </Form>
     )
 }
 
-export default UserForm
+
+export default PostForm
