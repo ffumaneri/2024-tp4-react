@@ -13,6 +13,7 @@ function Users() {
                 setLoading(false)
             })
     }, [])
+
     const usersContent = () => {
         const content = users.map(user =>
             <tr>
@@ -25,6 +26,7 @@ function Users() {
         )
         return <tbody>{content}</tbody>
     }
+
     const showUsers = () => {
         return(
             <Table>
@@ -40,6 +42,7 @@ function Users() {
             </Table>
         ) 
     }
+
     if (loading) {
         return (
             <Container>
@@ -50,13 +53,14 @@ function Users() {
             </Container>
           );        
     }
+
     return (
         <Container>
             <h1>Axios - Ejemplo</h1>
             {users != null && showUsers()}
             <Button href="/adduser">Agregar User</Button>
         </Container>
-    )
+    );
 }
 
 export default Users;

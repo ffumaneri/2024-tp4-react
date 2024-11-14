@@ -4,7 +4,7 @@ import { Button, Container, Form, Spinner } from "react-bootstrap"
 import { useNavigate, useSearchParams } from "react-router-dom"
 
 function UserForm() {
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(true)
@@ -23,7 +23,7 @@ function UserForm() {
             )
         }
         setLoading(false)
-    }, [])
+    }, [ searchParams ])
     const enviarDatos = (e) => {
         setLoading(true)
         axios.post("https://jsonplaceholder.typicode.com/users").then(
