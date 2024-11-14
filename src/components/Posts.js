@@ -1,24 +1,44 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
+import { Container, Spinner, Table } from "react-bootstrap";
+import React from 'react';
 
 function Posts() {
     
-    //TODO: Agregar los states necesarios
-
+    // TODO: Agregar los states necesarios
+    const [posts, setPosts] = useState(null)
     const [loading, setLoading] = useState(true)
  
     useEffect(() => {
         axios.get("https://jsonplaceholder.typicode.com/posts")
             .then((response) => {
-                // TODO: leer los posts
-
+                setPosts(response.data)
+                setLoading(false)
             })
     }, [])
+    const postsContent = () => {
+        const content = posts.map(post =>
+            <tr key={post.id}>
+                <td>{post.title}</td>
+                <td>{post.body}</td>
+            </tr>
+        )
+        return <tbody>{content}</tbody>
+    }
 
     const showPosts = () => {
         return(
-            {/* TODO: Mostrar tabla de posts*/ }
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Id de Usuario</th>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Cuerpo</th>
+                    </tr>
+                </thead>
+                {postsContent()}
+            </Table>     
         ) 
     }
     if (loading) {
@@ -34,7 +54,7 @@ function Posts() {
     return (
         <Container>
             <h1>Posts</h1>
-            {/* TODO: mostrar POSTS */}
+            {posts != null && showPosts()}
         </Container>
     )
 }

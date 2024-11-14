@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Button, Container, Form, Spinner } from "react-bootstrap"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import React from 'react';
 
 function UserForm() {
     const [searchParams, setSearchParams] = useSearchParams()
@@ -14,7 +15,6 @@ function UserForm() {
     useEffect(() => {
         const id = searchParams.get("id")
         if (id) {
-            //Edit
             axios.get("https://jsonplaceholder.typicode.com/users/" + id).then(
                 (response) => {
                     setName(response.data.name)
