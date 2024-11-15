@@ -12,15 +12,41 @@ function Posts() {
         axios.get("https://jsonplaceholder.typicode.com/posts")
             .then((response) => {
                 // TODO: leer los posts
+                setUsers(response.data)
+                setLoading(false)
 
             })
     }, [])
 
-    const showPosts = () => {
-        return(
-            {/* TODO: Mostrar tabla de posts*/ }
-        ) 
-    }
+    const postsContent = () => {
+        const content = posts.map((post) => (
+          <tr>
+
+            <td>{post.userId}</td>
+            <td>{post.id}</td>
+            <td>{post.title}</td>
+            <td>{post.body}</td>
+          </tr>
+        ));
+        return <tbody>{content}</tbody>;
+      };
+
+      const showPosts = () => {
+        return (
+          <table>
+            <thead>
+              <tr>
+                <th>UserID</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Body</th>
+              </tr>
+            </thead>
+            {postsContent()}
+          </table>
+        );
+      };
+
     if (loading) {
         return (
             <Container>
@@ -35,6 +61,7 @@ function Posts() {
         <Container>
             <h1>Posts</h1>
             {/* TODO: mostrar POSTS */}
+            {posts && showPosts()}
         </Container>
     )
 }
