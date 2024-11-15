@@ -13,7 +13,7 @@ function Posts() {
             .then((response) => {
                 // TODO: leer los posts
                 setUsers(response.data)
-                setLoading(false)               
+                setLoading(false)                    
 
             })
     }, [])
@@ -61,7 +61,7 @@ function Posts() {
         <Container>
             <h1>Posts</h1>
             {/* TODO: mostrar POSTS */}
-            {posts && showPosts()}
+            posts && showPosts()
         </Container>
     )
 }
