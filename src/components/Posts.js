@@ -2,41 +2,81 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Spinner } from "react-bootstrap";
 
-function Posts() {
-    
-    //TODO: Agregar los states necesarios
+export default function Posts() {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-    const [loading, setLoading] = useState(true)
- 
-    useEffect(() => {
-        axios.get("https://jsonplaceholder.typicode.com/posts")
-            .then((response) => {
-                // TODO: leer los posts
+  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => {
+        if (response.status === 200) {
+          setPosts(response.data);
+        }
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, []);
 
-            })
-    }, [])
-
-    const showPosts = () => {
-        return(
-            {/* TODO: Mostrar tabla de posts*/ }
-        ) 
+  useEffect(() => {
+    if (posts.length > 0 || error) {
+      setLoading(false);
     }
-    if (loading) {
-        return (
-            <Container>
-                <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-                </Spinner> 
-                Cargando... (acá van a estar los posts)
-            </Container>
-          );        
-    }
+  }, [posts, error]);
+
+  const postContent = () => {
+    const content = posts?.map((post) => (
+      <tr key={post.id}>
+        <td>{post.id}</td>
+        <td>{post.title}</td>
+        <td>{post.body}</td>
+        <td>{post.userId}</td>
+      </tr>
+    ));
+    return <tbody>{content}</tbody>;
+  };
+
+  const showPosts = () => {
     return (
-        <Container>
-            <h1>Posts</h1>
-            {/* TODO: mostrar POSTS */}
-        </Container>
-    )
-}
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Titulo</th>
+            <th>Contenido</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        {postContent()}
+      </table>
+    );
+  };
 
-export default Posts;
+  if (loading) {
+    return (
+      <Container>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+        Cargando posts...
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container style={{ backgroundColor: "lightcoral" }}>
+        Ha ocurrido un error al conectar con el servidor.
+      </Container>
+    );
+  }
+
+  return (
+    <Container>
+      <h1>Posts</h1>
+      {posts.length > 0 && showPosts()}
+    </Container>
+  );
+}
