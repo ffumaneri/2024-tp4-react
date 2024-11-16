@@ -13,8 +13,8 @@ function Posts() {
             .then((response) => {
                 // TODO: leer los posts
                 setUsers(response.data)
-                setLoading(false)    
-                                
+                setLoading(false)  
+
 
             })
     }, [])
