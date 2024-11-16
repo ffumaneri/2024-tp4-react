@@ -1,25 +1,48 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
+import { Container, Spinner, Table, Alert } from "react-bootstrap";
 
 function Posts() {
-    
-    //TODO: Agregar los states necesarios
-
-    const [loading, setLoading] = useState(true)
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
  
     useEffect(() => {
-        axios.get("https://jsonplaceholder.typicode.com/posts")
+        axios
+            .get("https://jsonplaceholder.typicode.com/posts")
             .then((response) => {
-                // TODO: leer los posts
-
+                setPosts(response.data); 
+                setLoading(false);
             })
-    }, [])
+            .catch((err) => {
+                setError("Error al cargar los posts");
+                setLoading(false);
+            });
+    }, []);
 
     const showPosts = () => {
-        return(
-            {/* TODO: Mostrar tabla de posts*/ }
-        ) 
+        return (
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID_Usuario</th>
+                        <th>Título</th>
+                        <th>Contenido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {posts.map((post) => (
+                        <tr >
+                            <td>{post.id}</td>
+                            <td>{post.userId}</td>
+                            <td>{post.title}</td>
+                            <td>{post.body}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+        );
     }
     if (loading) {
         return (
@@ -27,14 +50,21 @@ function Posts() {
                 <Spinner animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>
                 </Spinner> 
-                Cargando... (acá van a estar los posts)
+                Cargando... 
             </Container>
           );        
     }
+    if (error) {
+        return (
+            <Container className="mt-4">
+                <Alert variant="danger">{error}</Alert>
+            </Container>
+        );
+    }
     return (
-        <Container>
+        <Container className="mt-4">
             <h1>Posts</h1>
-            {/* TODO: mostrar POSTS */}
+            {showPosts()}
         </Container>
     )
 }
