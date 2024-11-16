@@ -14,6 +14,7 @@ function Posts() {
                 // TODO: leer los posts
                 setUsers(response.data)
                 setLoading(false)
+                
 
 
             })
