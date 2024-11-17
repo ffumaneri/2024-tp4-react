@@ -52,7 +52,7 @@ function Users() {
     }
     return (
         <Container>
-            <h1>Axios - Ejemplo</h1>
+            <h1>Users</h1>
             {users != null && showUsers()}
             <Button href="/adduser">Agregar User</Button>
         </Container>
