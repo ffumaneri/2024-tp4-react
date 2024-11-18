@@ -26,7 +26,7 @@ function Posts() {
                 <td>{post.id}</td>
                 <td>{post.title}</td>
                 <td>{post.body}</td>
-                {/* <td><Button href={'edituser?id=' + user.id}>Editar</Button></td> */}
+                {/* <td><Button href={'/edituser?id=' + user.id}>Editar</Button></td> */}
             </tr>
         )
         return <tbody>{content}</tbody>
