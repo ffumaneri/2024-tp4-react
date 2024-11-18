@@ -12,7 +12,7 @@ function Posts() {
     useEffect(() => {
         axios.get("https://jsonplaceholder.typicode.com/posts")
             .then((response) => {
-                // TODO: leer los posts
+                // TODO: leer los post
 
                 setPosts(response.data)
                 setLoading(false)
