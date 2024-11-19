@@ -18,8 +18,11 @@ function Home() {
 function App() {
   return (
     <Router>
-      <Container className='p-6 bg-dark text-white'>
+      <Container className='p-6 mb-3 bg-dark text-white'>
         <Nav>
+          <Nav.Item>
+            <Nav.Link href="/\">HOME</Nav.Link>
+          </Nav.Item>
           <Nav.Item>
             <Nav.Link href="/users">USERS</Nav.Link>
           </Nav.Item>
