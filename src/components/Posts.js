@@ -3,22 +3,25 @@ import { useEffect, useState } from "react";
 import { Container, Spinner } from "react-bootstrap";
 
 function Posts() {
-    
-    //TODO: Agregar los states necesarios
-
+    const [posts, setPosts] = useState(null)
     const [loading, setLoading] = useState(true)
  
     useEffect(() => {
         axios.get("https://jsonplaceholder.typicode.com/posts")
             .then((response) => {
-                // TODO: leer los posts
-
+                setPosts(response.data)
+                setLoading(false)
             })
     }, [])
-
     const showPosts = () => {
         return(
-            {/* TODO: Mostrar tabla de posts*/ }
+                posts.map(post =>
+                    <tr key={post.id}>
+                        <td>{post.id}</td>
+                        <td>{post.title}</td>
+                        <td>{post.body}</td>
+                    </tr>
+                )
         ) 
     }
     if (loading) {
@@ -34,7 +37,7 @@ function Posts() {
     return (
         <Container>
             <h1>Posts</h1>
-            {/* TODO: mostrar POSTS */}
+            {posts != null && showPosts()}
         </Container>
     )
 }
